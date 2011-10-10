@@ -17,6 +17,8 @@ How to use it
 Take a look at the test classes in the src/test/java folder.
 PlacesIntegrationTest and CategoriesIntegrationTest are probably a good place to start.
 
+I wrote a simple client ```com.hyperpublic.Client```
+
 Disclaimer
 ----------
 The level of quality and unit testing code coverage is definitely not up to standards, but this should get you going.

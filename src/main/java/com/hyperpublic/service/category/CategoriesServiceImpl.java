@@ -41,9 +41,9 @@ public class CategoriesServiceImpl extends AbstractService implements Categories
         return urlBuilder.append(
                 Constants.BASE_URL_CATEGORIES_ENDPOINT).
                 append("?client_id").append("=").
-                append(auth.getUserClientID() != null ? auth.getUserClientID() : Auth.DEFAULT_CLIENT_ID).
+                append(auth != null && auth.getUserClientID() != null ? auth.getUserClientID() : Auth.DEFAULT_CLIENT_ID).
                 append("&client_secret").append("=").
-                append(auth.getUserClientSecret() != null ? auth.getUserClientSecret() : Auth.DEFAULT_CLIENT_SECRET).toString();
+                append(auth != null && auth.getUserClientSecret() != null ? auth.getUserClientSecret() : Auth.DEFAULT_CLIENT_SECRET).toString();
     }
 
 }

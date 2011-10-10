@@ -39,4 +39,17 @@ public class PlacesIntegrationTest {
             LOGGER.info("Found: {}", place);
         }
     }
+
+    @Test
+    public void simpleCallWithAuth() {
+        final String lat = "37.7777";
+        final String lon = "-122.4086";
+        Auth auth = new Auth(Auth.DEFAULT_CLIENT_ID, Auth.DEFAULT_CLIENT_SECRET); //no need to specifically set the auth if null, it will use the defaults.
+        PlacesResponse res = placesService.callEndpoint(lat, lon, auth);
+        assertNotNull(res);
+        assertNotNull(res.getResponse());
+        for (Place place : res.getResponse()) {
+            LOGGER.info("Found: {}", place);
+        }
+    }
 }

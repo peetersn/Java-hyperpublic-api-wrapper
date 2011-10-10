@@ -24,7 +24,7 @@ public class CategoriesIntegrationTest {
     
     @Test
     public void simpleCall() {
-        CategoriesResponse res = categoriesService.callEndpoint();
+        CategoriesResponse res = categoriesService.callEndpoint(null);
         assertNotNull(res);
         assertNotNull(res.getResponse());
         assertTrue(res.getResponse().size() > 5);

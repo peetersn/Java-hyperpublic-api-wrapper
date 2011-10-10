@@ -15,9 +15,9 @@ public class Auth {
     public String userClientID;
     public String userClientSecret;
 
-    public Auth(String userClientSecret, String userClientID) {
-        this.userClientSecret = userClientSecret;
+    public Auth(String userClientID, String userClientSecret) {
         this.userClientID = userClientID;
+        this.userClientSecret = userClientSecret;
     }
 
     public String getUserClientSecret() {
