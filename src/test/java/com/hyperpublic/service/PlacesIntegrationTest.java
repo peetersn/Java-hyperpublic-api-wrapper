@@ -1,5 +1,6 @@
 package com.hyperpublic.service;
 
+import com.hyperpublic.domain.Auth;
 import com.hyperpublic.domain.Place;
 import com.hyperpublic.service.places.PlacesResponse;
 import com.hyperpublic.service.places.PlacesServiceImpl;
@@ -30,7 +31,8 @@ public class PlacesIntegrationTest {
     public void simpleCall() {
         final String lat = "37.7777";
         final String lon = "-122.4086";
-        PlacesResponse res = placesService.callEndpoint(lat, lon);
+        Auth auth = null; //no need to specifically set the auth if null, it will use the defaults.
+        PlacesResponse res = placesService.callEndpoint(lat, lon, auth);
         assertNotNull(res);
         assertNotNull(res.getResponse());
         for (Place place : res.getResponse()) {

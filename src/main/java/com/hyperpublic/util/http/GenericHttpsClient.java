@@ -44,16 +44,15 @@ public class GenericHttpsClient {
         try {
             HttpResponse httpResponse = client.execute(httpGet);
 
-            int statusCode = httpResponse.getStatusLine().getStatusCode();
-            if (statusCode != HttpStatus.SC_OK) {
-                LOGGER.warn("Method failed, invalid URL: " + httpResponse.getStatusLine().getReasonPhrase());
+            if (httpResponse.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+                LOGGER.warn("Method failed, invalid URL: {}", httpResponse.getStatusLine().getReasonPhrase());
             }
 
             if (httpResponse.getEntity() != null) {
                 jsonResponse = readResponseAsStream(httpResponse.getEntity().getContent());
             }
         } catch (IOException e) {
-            LOGGER.error("Fatal transport error: {}", e.getMessage());
+            LOGGER.error("Fatal transport error: {}", e.getMessage(), e);
         } finally {
             client.getConnectionManager().shutdown();
         }

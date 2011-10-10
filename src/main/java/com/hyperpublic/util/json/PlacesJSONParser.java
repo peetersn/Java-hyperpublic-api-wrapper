@@ -12,10 +12,17 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
+ * Transforms the JSON into Java objects
  * @author @peetersn
  */
 public class PlacesJSONParser {
 
+    /** Transforms the JSON response into a Java object.
+     * //TODO I'm sure there's a easier way to do this. This is future work!
+     *
+     * @param jsonString the raw JSON string.
+     * @return a Set of Place objects
+     */
     public Set<Place> formatResponse(String jsonString) {
 
         Set<Place> places = new LinkedHashSet<Place>();

@@ -5,6 +5,8 @@ import com.hyperpublic.domain.Category;
 import java.util.Set;
 
 /**
+ * Value object that contains all the categories.
+ * 
  * @author @peetersn
  */
 public class CategoriesResponse {

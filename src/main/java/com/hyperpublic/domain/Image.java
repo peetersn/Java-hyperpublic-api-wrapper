@@ -4,7 +4,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
- * Represents the objec that holds the image metadata.
+ * Represents the object that holds the image metadata.
  * 
  * @author @peetersn
  */

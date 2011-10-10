@@ -9,7 +9,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * Parses the response of the category endpoint
+ * Parses the response of the category endpoint into a Category Java object.
+ *
  * @author @peetersn
  */
 public class CategoriesJSONParser {

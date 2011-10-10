@@ -1,5 +1,7 @@
 package com.hyperpublic.service.category;
 
+import com.hyperpublic.domain.Auth;
+
 /**
  * This implements the Category endpoint:
  *
@@ -11,7 +13,8 @@ public interface CategoriesService {
 
     /**
      * Returns the list of categories
-     * @return
+     * @param auth contains the authorization tokens
+     * @return a response object containing the list of categories
      */
-    CategoriesResponse callEndpoint();
+    CategoriesResponse callEndpoint(Auth auth);
 }
