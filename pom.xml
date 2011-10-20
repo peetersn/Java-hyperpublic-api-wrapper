@@ -8,29 +8,15 @@
     <description>This is a simple wrapper for the HyperPublic API</description>
 
     <properties>
-        <org.apache.httpcomponents.version>4.1</org.apache.httpcomponents.version>
         <junit.version>4.8.2</junit.version>
         <log4j.version>1.2.14</log4j.version>
         <slf4j.version>1.6.1</slf4j.version>
         <commons-lang.version>2.6</commons-lang.version>
-        <json-lib.version>2.3</json-lib.version>
         <jackson-version>1.6.0</jackson-version>
-
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>${org.apache.httpcomponents.version}</version>
-            </dependency>
-            <!--<dependency>-->
-                <!--<groupId>net.sf.json-lib</groupId>-->
-                <!--<artifactId>json-lib</artifactId>-->
-                <!--<classifier>jdk15</classifier>-->
-                <!--<version>${json-lib.version}</version>-->
-            <!--</dependency>-->
             <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
@@ -66,15 +52,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.json-lib</groupId>
-            <artifactId>json-lib</artifactId>
-            <classifier>jdk15</classifier>
-        </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
