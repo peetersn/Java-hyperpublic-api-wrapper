@@ -1,14 +1,13 @@
 package com.hyperpublic;
 
-import com.hyperpublic.domain.Auth;
 import com.hyperpublic.domain.Place;
-import com.hyperpublic.service.places.PlacesResponse;
 import com.hyperpublic.service.places.PlacesServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * This is the main client.
+ *
  * @author @peetersn
  */
 public class Client {
@@ -19,10 +18,9 @@ public class Client {
 
         PlacesServiceImpl placesService = new PlacesServiceImpl();
 
-        PlacesResponse places = placesService.callEndpoint("37.7777", "-122.4086",
-                new Auth(Auth.DEFAULT_CLIENT_ID, Auth.DEFAULT_CLIENT_SECRET));
+        Place[] places = placesService.getPlaces("37.7777", "-122.4086");
 
-        for (Place place : places.getResponse()) {
+        for (Place place : places) {
             LOGGER.info("Found: {}", place);
         }
     }

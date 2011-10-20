@@ -1,24 +1,29 @@
 package com.hyperpublic.domain;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
- * Represents a location
- *
- * @author @peetersn
+ * @author npeeters
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Location {
 
     private String name;
     private Double lat;
     private Double lon;
+    @JsonProperty("address_line_1")
     private String addressLine1;
+    @JsonProperty("address_line_2")
     private String addressLine2;
     private String city;
     private String province;
     private String country;
+    @JsonProperty("postal_code")
     private String postalCode;
+
+    public Location() {
+    }
 
     public Location(String name, Double lat, Double lon, String addressLine1, String addressLine2, String city, String province, String country, String postalCode) {
         this.name = name;
@@ -106,6 +111,16 @@ public class Location {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
+        StringBuilder b = new StringBuilder();
+              b.append(name).append("\",\"").
+                append(addressLine1).append("\",\"").
+                append(addressLine2).append("\",\"").
+                append(city).append("\",\"").
+                append(postalCode).append("\",\"").
+                append(province).append("\",\"").
+                append(country).append("\",\"").
+                append(Double.toString(lat)).append("\",\"").
+                append(Double.toString(lon));
+        return b.toString();
     }
 }

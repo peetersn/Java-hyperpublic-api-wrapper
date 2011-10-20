@@ -2,31 +2,43 @@ package com.hyperpublic.domain;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Main object of the Places endpoint.
- * 
- * @author @peetersn
+ * @author npeeters
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Place {
 
     private String id;
+    @JsonProperty("object_type")
     private String objectType;
+    @JsonProperty("perma_link")
     private String permaLink;
+    @JsonProperty("display_name")
     private String displayName;
+    @JsonProperty("phone_number")
     private String phoneNumber;
     private String website;
 
     private Double distance;
     private List<Location> locations = new ArrayList<Location>();
 
-    private Set<Image> images = new LinkedHashSet<Image>();
-    private Set<String> tags = new LinkedHashSet<String>();
-    private Set<Category> categories = new LinkedHashSet<Category>();
+    @JsonProperty("images")
+    private List<Image> images = new ArrayList<Image>();
+    @JsonProperty("tags")
+    private List<String> tags = new ArrayList<String>();
 
-    private Map<String, String> properties = new LinkedHashMap<String, String>();
+    @JsonProperty("category")
+    private List<Category> categories = new ArrayList<Category>();
+
+//    @JsonProperty("properties")
+//    private List<Property> properties = new ArrayList<Property>();
+//    TODO there's an issue with some of the properties so I exclude them explicitely from the mapping...
 
     public String getId() {
         return id;
@@ -96,23 +108,19 @@ public class Place {
         this.getLocations().add(location);
     }
 
-    public Set<Image> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(Set<Image> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 
-    public void addImage(Image image) {
-        getImages().add(image);
-    }
-
-    public Set<String> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(Set<String> tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 
@@ -120,11 +128,11 @@ public class Place {
         getTags().add(tag);
     }
 
-    public Set<Category> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<Category> categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 
@@ -132,21 +140,23 @@ public class Place {
         getCategories().add(category);
     }
 
-    public Map<String, String> getProperties() {
-        return properties;
-    }
-
-    public void setProperties(Map<String, String> properties) {
-        this.properties = properties;
-    }
-
-    public void addProperty(String key, String value) {
-        getProperties().put(key, value);
-    }
+//    public List<Property> getProperties() {
+//        return properties;
+//    }
+//
+//    public void setProperties(List<Property> properties) {
+//        this.properties = properties;
+//    }
+//
+//    public void addProperty(String key, String value) {
+//        String [] v = { value };
+//        getProperties().add(new Property(key, v));
+//    }
 
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
+
 
 }
 

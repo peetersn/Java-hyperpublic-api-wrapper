@@ -1,6 +1,6 @@
 package com.hyperpublic.service.places;
 
-import com.hyperpublic.domain.Auth;
+import com.hyperpublic.domain.Place;
 
 /**
  * @author @peetersn
@@ -9,10 +9,10 @@ public interface PlacesService {
 
     /**
      * Calls the Places endpoint and returns a collect of Place
+     *
      * @param lat Latitude (as String)
      * @param lon Longitude (as String)
-     * @param auth contains the authorization tokens
-     * @return a Set of Place objects
+     * @return an array of Place objects
      */
-    PlacesResponse callEndpoint(String lat, String lon, Auth auth );
+    Place[] getPlaces(String lat, String lon);
 }

@@ -1,12 +1,14 @@
 package com.hyperpublic.domain;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * Category object
- * @author @peetersn
+ * @author npeeters
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Category {
 
     private String id;
@@ -49,8 +51,19 @@ public class Category {
         getSubCategories().add(cat);
     }
 
-    @Override
     public String toString() {
+        StringBuilder b = new StringBuilder();
+        b.append(getName()).append("#");
+        for (Category subCategory : subCategories) {
+            b.append(subCategory.getName()).append("#");
+
+            if (subCategory.getSubCategories() != null) {
+                for (Category subsub : subCategory.getSubCategories()) {
+                    b.append(subsub.getName()).append("#");
+                }
+            }
+        }
         return getName();
+
     }
 }

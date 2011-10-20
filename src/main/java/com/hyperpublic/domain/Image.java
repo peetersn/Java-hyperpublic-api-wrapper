@@ -2,17 +2,24 @@ package com.hyperpublic.domain;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
- * Represents the object that holds the image metadata.
- * 
- * @author @peetersn
+ * @author npeeters
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Image {
 
+    @JsonProperty("src_thumb")
     private String thumb;
+    @JsonProperty("src_small")
     private String small;
+    @JsonProperty("src_large")
     private String large;
+
+    public Image() {
+    }
 
     public Image(String thumb, String small, String large) {
         this.thumb = thumb;

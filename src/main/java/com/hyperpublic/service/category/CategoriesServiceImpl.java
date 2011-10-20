@@ -1,13 +1,11 @@
 package com.hyperpublic.service.category;
 
-import com.hyperpublic.domain.Auth;
 import com.hyperpublic.domain.Category;
 import com.hyperpublic.domain.Constants;
 import com.hyperpublic.service.AbstractService;
-import com.hyperpublic.util.http.GenericHttpsClient;
-import com.hyperpublic.util.json.CategoriesJSONParser;
-
-import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * This is the implementation of the Category endpoint:
@@ -18,32 +16,17 @@ import java.util.Set;
  */
 public class CategoriesServiceImpl extends AbstractService implements CategoriesService {
 
-    private final GenericHttpsClient client = new GenericHttpsClient();
+    private static final Logger LOGGER = LoggerFactory.getLogger(CategoriesServiceImpl.class);
 
-    @Override
-    public CategoriesResponse callEndpoint(Auth auth) {
-        CategoriesResponse response = new CategoriesResponse();
-        CategoriesJSONParser jsonUtil = new CategoriesJSONParser();
-        String jsonResponse = client.call(createQuery(auth));
-        Set<Category> places = jsonUtil.formatResponse(jsonResponse);
-        response.setResponse(places);
-        return response;
+    public Category[] getCategories() {
+        if (!init) { //this is a bit of hack for SSL trust
+            trustSelfSignedSSL();
+        }
+
+        RestTemplate restTemplate = createTemplate();
+        Category[] res = restTemplate.getForObject(
+                        Constants.BASE_URL_CATEGORIES_ENDPOINT + "?client_id={clientId}&client_secret={clientSecret}",
+                        Category[].class, Constants.CLIENT_ID, Constants.CLIENT_SECRET);
+        return res;
     }
-
-    /**
-     * Builds the query for a given lat/lon
-     * https://api.hyperpublic.com/api/v1/categories?client_id=8UufhI6bCKQXKMBn7AUWO67Yq6C8RkfD0BGouTke&client_secret=zdoROY5XRN0clIWsEJyKzHedSK4irYee8jpnOXaP
-     *
-     * @return a String with the URL signed with the ID and SECRET
-     */
-    private String createQuery(Auth auth) {
-        StringBuilder urlBuilder = new StringBuilder();
-        return urlBuilder.append(
-                Constants.BASE_URL_CATEGORIES_ENDPOINT).
-                append("?client_id").append("=").
-                append(auth != null && auth.getUserClientID() != null ? auth.getUserClientID() : Auth.DEFAULT_CLIENT_ID).
-                append("&client_secret").append("=").
-                append(auth != null && auth.getUserClientSecret() != null ? auth.getUserClientSecret() : Auth.DEFAULT_CLIENT_SECRET).toString();
-    }
-
 }

@@ -1,10 +1,11 @@
 package com.hyperpublic.service;
 
-import com.hyperpublic.service.category.CategoriesResponse;
+import com.hyperpublic.domain.Category;
 import com.hyperpublic.service.category.CategoriesService;
 import com.hyperpublic.service.category.CategoriesServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.LoggerFactory;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -15,6 +16,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class CategoriesIntegrationTest {
 
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CategoriesIntegrationTest.class);
+
     private CategoriesService categoriesService;
 
     @Before
@@ -24,9 +27,11 @@ public class CategoriesIntegrationTest {
     
     @Test
     public void simpleCall() {
-        CategoriesResponse res = categoriesService.callEndpoint(null);
-        assertNotNull(res);
-        assertNotNull(res.getResponse());
-        assertTrue(res.getResponse().size() > 5);
+        Category[] categories = categoriesService.getCategories();
+        assertNotNull(categories);
+        assertTrue(categories.length > 5);
+        for (Category c : categories) {
+            LOGGER.info("{}", c);
+        }
     }
 }
