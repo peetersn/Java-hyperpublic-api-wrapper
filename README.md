@@ -18,16 +18,13 @@ Take a look at the test classes in the src/test/java folder.
 PlacesIntegrationTest and CategoriesIntegrationTest are probably a good place to start.
 
 I wrote a simple client ```com.hyperpublic.Client``` which you can use like this:
+
 ```
    PlacesServiceImpl placesService = new PlacesServiceImpl();
-
-   PlacesResponse places = placesService.callEndpoint("37.7777", "-122.4086",
-       new Auth(Auth.DEFAULT_CLIENT_ID, Auth.DEFAULT_CLIENT_SECRET));
-
-   //The places contains a Set of Place object that you can use...
+   Place[] places = placesService.getPlaces("37.7777", "-122.4086");
+   //The places array contains the "Place" object that you can use...
 
 ```
-
 
 Disclaimer
 ----------
